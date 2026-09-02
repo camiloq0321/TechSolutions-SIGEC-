@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Calidad y Despliegue SIGEC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"> 
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Sprite de íconos (no se ve; se reutiliza con <use>) -->
+<svg style="display:none" aria-hidden="true">
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><line x1="8" y1="20" x2="16" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><line x1="8" y1="21" x2="8" y2="18"/><line x1="16" y1="21" x2="16" y2="18"/><rect x="7" y="6" width="2.2" height="2.2"/><rect x="14.8" y="6" width="2.2" height="2.2"/><rect x="7" y="10.5" width="2.2" height="2.2"/><rect x="14.8" y="10.5" width="2.2" height="2.2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/><polyline points="9 12 11 14 15 9"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 0 1 16 0"/><line x1="12" y1="16" x2="15.5" y2="11.5"/><circle cx="12" cy="16" r="1.4"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><polyline points="9 13 11 15 15 10"/></symbol>
+    <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="8" r="2"/><line x1="6" y1="8" x2="6" y2="16"/><path d="M6 12c0 3 3 3 6 3h4"/><line x1="18" y1="10" x2="18" y2="15"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 16a4 4 0 0 1 .6-7.9 5 5 0 0 1 9.6 1.1A4 4 0 0 1 17 16H7z"/><polyline points="9.5 15 12 12.3 14.5 15"/><line x1="12" y1="12.3" x2="12" y2="20"/></symbol>
+    <symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="14" width="4.2" height="6" rx="1.5"/><rect x="17.8" y="14" width="4.2" height="6" rx="1.5"/><path d="M20 20v.5a3 3 0 0 1-3 3h-3"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.2c-2.1-1.6-5.1-2.1-8-1.2v13.6c2.9-.9 5.9-.4 8 1.2 2.1-1.6 5.1-2.1 8-1.2V5c-2.9-.9-5.9-.4-8 1.2Z"/><line x1="12" y1="6.2" x2="12" y2="19.8"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="7.8 12.5 10.8 15.5 16.2 9"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2 7 4-14 2 7h6"/></symbol>
+    <symbol id="i-bug" viewBox="0 0 24 24"><rect x="8" y="7" width="8" height="11" rx="4"/><line x1="12" y1="4" x2="12" y2="7"/><line x1="9" y1="4.5" x2="10.3" y2="6.5"/><line x1="15" y1="4.5" x2="13.7" y2="6.5"/><line x1="5" y1="10" x2="8" y2="11"/><line x1="19" y1="10" x2="16" y2="11"/><line x1="5" y1="17" x2="8" y2="15.5"/><line x1="19" y1="17" x2="16" y2="15.5"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 3 21 8 12 13 3 8 12 3"/><polyline points="3 13 12 18 21 13"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="9" y1="10" x2="9" y2="10.2"/><line x1="15" y1="10" x2="15" y2="10.2"/><path d="M8.5 14.5c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><line x1="5" y1="3" x2="5" y2="21"/><path d="M5 4h13l-3 4 3 4H5"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="banner">
+    <div class="banner-inner">
+        <div class="brand">
+            <svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>
+            <div class="brand-text">
+                <a href="#inicio"><strong>SIGEC</strong></a>
+                <span>TechnoSolutions</span>
+            </div>
+        </div>
+        <nav class="menu" aria-label="Secciones del documento">
+        <ol>
+            <li><a href="#contexto"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg>Contexto</a></li>
+            <li><a href="#paso1"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Modelo</a></li>
+            <li><a href="#paso2"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Métricas</a></li>
+            <li><a href="#paso3"><svg class="icon" aria-hidden="true"><use href="#i-clipboard"/></svg>Pruebas</a></li>
+            <li><a href="#paso4"><svg class="icon" aria-hidden="true"><use href="#i-branch"/></svg>Config.</a></li>
+            <li><a href="#paso5"><svg class="icon" aria-hidden="true"><use href="#i-cloud"/></svg>Despliegue</a></li>
+            <li><a href="#paso6"><svg class="icon" aria-hidden="true"><use href="#i-headset"/></svg>Soporte</a></li>
+            <li><a href="#paso7"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Docs</a></li>
+        </ol>
+        </nav>
+    </div>
+</header>
+
+<div class="hero" id="inicio">
+    <div class="hero-inner">
+        <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg>Ingeniería de Requisitos · Actividad final</span>
+        <h1>Plan de calidad, pruebas y despliegue del sistema SIGEC</h1>
+        <p class="subtitle">Continuación del proyecto de análisis de requerimientos de TechSolutions: se define el modelo de calidad, las métricas, el plan de pruebas, la gestión de la configuración, el despliegue y el soporte post-entrega del sistema de gestión de inventario de equipos de cómputo.</p>
+
+        <div class="fields">
+            <div class="field"><span class="label">Proyecto</span><span class="value">SIGEC — Sistema de Gestión de Inventario de Equipos de Cómputo</span></div>
+            <div class="field"><span class="label">Autor</span><span class="value">Cristhian Camilo Quintana Osorno</span></div>
+            <div class="field"><span class="label">Curso</span><span class="value">Ingeniería de Requisitos</span></div>
+            <div class="field"><span class="label">Fecha de entrega</span><span class="value">1 de septiembre de 2026</span></div>
+            <div class="field"><span class="label">Docente</span><span class="value">Claudia Marcela Muñoz Guzmán</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="wrap">
+    <main id="main">
+
+        <section class="step" id="contexto">
+    <div class="step-head">
+        <span class="step-badge"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg></span>
+        <div><span class="step-kicker">00 · Contexto</span><h2>Contexto del proyecto</h2></div>
+    </div>
+    <div class="prose">
+        <p>TechSolutions es una organización de aproximadamente 1000 empleados cuyo control de equipos de cómputo se realizaba de forma manual en archivos de Excel independientes, generando duplicidad de información, ausencia de alertas de obsolescencia y falta de reportes confiables para el presupuesto de renovación tecnológica. A partir de ese diagnóstico se definieron 8 requerimientos funcionales (RF-01 a RF-08) y 8 no funcionales (RNF-01 a RNF-08) para <strong>SIGEC</strong>, el sistema que centraliza y automatiza esa gestión.</p>
+        <p>Esta actividad retoma SIGEC para diseñar su plan de calidad y pruebas, y complementarlo con la planeación del despliegue, la gestión de la configuración, el soporte y la documentación posteriores a la entrega.</p>
+    </div>
+    <div class="card-grid" style="margin-top:1.4rem;">
+    <div class="card">
+        <span class="card-label">Requerimiento Funcionales</span>
+        <p><strong>RF-01:</strong> El sistema debe permitir registrar cada equipo de cómputo con sus atributos: marca, modelo, número de serie, fecha de compra, área asignada y usuario responsable</p>
+        <p><strong>RF-02:</strong> El sistema debe permitir clasificar el estado de cada equipo en activo, en proceso de renovación u obsoleto</p>
+        <p><strong>RF-03:</strong> El sistema debe generar alertas automáticas cuando un equipo supere el tiempo de vida útil definido por la organización</p>
+        <p><strong>RF-04:</strong> El sistema debe permitir la búsqueda y filtrado de equipos por área, usuario, marca o estado</p>
+        <p><strong>RF-05:</strong> El sistema debe permitir generar reportes exportables en PDF y Excel del inventario tecnológico</p>
+        <p><strong>RF-06:</strong> El sistema debe registrar el historial de mantenimiento y cambios de estado de cada equipo</p>
+        <p><strong>RF-07:</strong> El sistema debe permitir la asignación y reasignación de equipos a los empleados</p>
+        <p><strong>RF-08:</strong> El sistema debe contar con perfiles de acceso diferenciados (administrador, técnico y consulta)</p>
+    </div>
+    <div class="card">
+        <span class="card-label">Requerimientos No Funcionales</span>
+        <p><strong>RNF-01:</strong> Usabilidad, la interfaz debe ser intuitiva y de fácil manejo para personal técnico sin capacitación avanzada</p>
+        <p><strong>RNF-02:</strong> Disponibilidad, el sistema debe estar disponibilidad al menos el 99% del tiempo en horario laboral</p>
+        <p><strong>RNF-03:</strong> Seguridad, el acceso debe requerir autenticación y los datos deben almacenarse cifrados</p>
+        <p><strong>RNF-04:</strong> Escalabilidad, el sistema debe soportar el crecimiento del inventario hasta 1500 equipos sin degradar el rendimiento</p>
+        <p><strong>RNF-05:</strong> Rendimiento, las consultas y búsquedas deben responder en un tiempo menor a 3 segundos</p>
+        <p><strong>RNF-06:</strong> Compatibilidad, el sistema debe integrarse con el DA corporativo</p>
+        <p><strong>RNF-07:</strong> Mantenibilidad, el código debe estar documentado para permitir su actualización por el equipo de TI interno</p>
+        <p><strong>RNF-08:</strong> Cumplimiento normativo, el manejo de datos personales de los usuarios debe cumplir con la normativa de protección de datos vigentes</p>
+    </div>
+    </div>
+        </section>
+
+        <section class="step" id="paso1">
+    <div class="step-head">
+        <span class="step-badge"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+        <div><span class="step-kicker">Paso 01</span><h2>Normas y modelos de calidad</h2></div>
+    </div>
+    <div class="prose">
+        <p><strong>Modelo seleccionado:</strong> ISO/IEC 25010:2011</p>
+        <p>Se adopta el modelo de calidad de producto de software <strong>ISO/IEC 25010</strong> como marco principal, complementado con <strong>ISO/IEC/IEC 29119</strong> para el proceso de pruebas. La elección responde a tres razones concretas para SIGEC:</p>
+        <ol class="plain">
+            <li><strong>Continuidad con el análisis previo.</strong> los ocho requisitos no funcionales definidos presentan una correspondencia directa con las características de calidad contempladas en el modelo ISO/IEC 25010. Por tanto, se mantiene este estándar como marco de referencia para evaluar la calidad del sistema, garantizando coherencia con el análisis realizado previamente y evitando reinterpretar los criterios de calidad desde cero.</li>
+            <li><strong>Cobertura de producto, no solo de proceso.</strong> A diferencia de CMMI (que evalúa la madurez del proceso de desarrollo), ISO/IEC 25010 evalúa directamente el software resultante, que es lo que la jefatura de TI y los técnicos de soporte perciben y usan a diario.</li>
+            <li><strong>Aplicabilidad a un equipo pequeño.</strong> El equipo de TI interno que dará mantenimiento a SIGEC es reducido; un modelo de producto con 8 características verificables es más viable de aplicar y auditar que un marco de madurez organizacional como CMMI, que exige una estructura de procesos más amplia.</li>
+        </ol>
+        <p>De forma complementaria, se toma como referencia de proceso un enfoque ágil con revisiones de calidad por iteración (inspirado en prácticas de CMMI nivel 2-3: gestión de requerimientos y aseguramiento de calidad), sin adoptar la certificación completa.</p>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+        <caption>Mapeo de características ISO/IEC 25010 → requerimientos no funcionales de SIGEC</caption>
+        <thead><tr><th>Característica ISO 25010</th><th>RNF relacionado</th><th>Aplicación en SIGEC</th></tr></thead>
+            <tbody>
+                <tr><td>Eficiencia de desempeño</td><td class="id-tag">RNF-05</td><td>Tiempo de respuesta de búsquedas y consultas menor a 3 segundos.</td></tr>
+                <tr><td>Compatibilidad</td><td class="id-tag">RNF-06</td><td>Integración con el directorio activo (DA) corporativo.</td></tr>
+                <tr><td>Usabilidad</td><td class="id-tag">RNF-01</td><td>Interfaz intuitiva para personal técnico sin capacitación avanzada.</td></tr>
+                <tr><td>Fiabilidad</td><td class="id-tag">RNF-02</td><td>Disponibilidad mínima del 99% en horario laboral.</td></tr>
+                <tr><td>Seguridad</td><td class="id-tag">RNF-03 / RNF-08</td><td>Autenticación, cifrado de datos y cumplimiento normativo de protección de datos personales.</td></tr>
+                <tr><td>Mantenibilidad</td><td class="id-tag">RNF-07</td><td>Código documentado para actualización por el equipo de TI interno.</td></tr>
+                <tr><td>Portabilidad / Escalabilidad</td><td class="id-tag">RNF-04</td><td>Soporte de crecimiento del inventario hasta 1500 equipos sin degradar el rendimiento.</td></tr>
+            </tbody>
+        </table>
+    </div>
+        </section>
+
+        <section class="step" id="paso2">
+    <div class="step-head">
+        <span class="step-badge"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg></span>
+        <div><span class="step-kicker">Paso 02</span><h2>Métricas de calidad</h2></div>
+    </div>
+    <p>Cinco métricas aplicables a SIGEC, cada una ligada a un requerimiento no funcional y a una forma concreta de medición.</p>
+
+    <div class="card-grid">
+        <div class="metric-card">
+            <span class="metric-icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+            <span class="metric-name">Tiempo de respuesta</span>
+            <span class="metric-target">&lt; 3 s</span>
+            <p class="metric-desc"><strong>Cómo se mide:</strong> herramienta de monitoreo (APM) que registra el percentil 95 (p95) de latencia del endpoint de búsqueda y filtrado, muestreado en horario laboral. Vinculada a RNF-05.</p>
+        </div>
+        <div class="metric-card">
+            <span class="metric-icon"><svg class="icon" aria-hidden="true"><use href="#i-pulse"/></svg></span>
+            <span class="metric-name">Disponibilidad del sistema</span>
+            <span class="metric-target">≥ 99 %</span>
+            <p class="metric-desc"><strong>Cómo se mide:</strong> (horas operativas − horas de caída) / horas operativas × 100, calculado mensualmente con un monitor de uptime sobre el horario laboral. Vinculada a RNF-02.</p>
+        </div>
+        <div class="metric-card">
+            <span class="metric-icon"><svg class="icon" aria-hidden="true"><use href="#i-bug"/></svg></span>
+            <span class="metric-name">Densidad de defectos</span>
+            <span class="metric-target">&lt; 5 críticos / release</span>
+            <p class="metric-desc"><strong>Cómo se mide:</strong> conteo de defectos por severidad registrados en el gestor de incidencias (Jira) durante QA, dividido entre los módulos entregados en cada versión.</p>
+        </div>
+        <div class="metric-card">
+            <span class="metric-icon"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span>
+            <span class="metric-name">Cobertura de pruebas</span>
+            <span class="metric-target">≥ 80 %</span>
+            <p class="metric-desc"><strong>Cómo se mide:</strong> porcentaje de líneas y ramas ejecutadas por pruebas automatizadas, calculado por una herramienta de cobertura integrada al pipeline de integración continua.</p>
+        </div>
+        <div class="metric-card">
+            <span class="metric-icon"><svg class="icon" aria-hidden="true"><use href="#i-smile"/></svg></span>
+            <span class="metric-name">Usabilidad percibida (SUS)</span>
+            <span class="metric-target">≥ 70 / 100</span>
+            <p class="metric-desc"><strong>Cómo se mide:</strong> cuestionario System Usability Scale de 10 preguntas aplicado a técnicos y usuarios finales tras la capacitación piloto. Vinculada a RNF-01.</p>
+        </div>
+    </div>
+        </section>
+
+        <section class="step" id="paso3">
+    <div class="step-head">
+        <span class="step-badge"><svg class="icon" aria-hidden="true"><use href="#i-clipboard"/></svg></span>
+        <div><span class="step-kicker">Paso 03</span><h2>Plan de pruebas</h2></div>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <caption>Casos de prueba</caption>
+            <thead><tr><th>ID</th><th>Caso de prueba</th><th>Resultado esperado</th><th>Tipo</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td class="id-tag">TC-01</td>
+                    <td>Registrar un equipo nuevo con marca, modelo, número de serie, fecha de compra, área y usuario responsable.</td>
+                    <td>El equipo queda almacenado y visible en el listado general con estado "Activo".</td>
+                    <td><span class="pill accent"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg>Funcional</span></td>
+                </tr>
+                <tr>
+                    <td class="id-tag">TC-02</td>
+                    <td>Cambiar manualmente el estado de un equipo a "Obsoleto" desde el panel de gestión.</td>
+                    <td>El nuevo estado se refleja de inmediato en el listado y en los reportes generados.</td>
+                    <td><span class="pill accent"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg>Funcional</span></td>
+                </tr>
+                <tr>
+                    <td class="id-tag">TC-03</td>
+                    <td>Registrar un equipo cuya fecha de compra supere la vida útil definida por la organización (ej. 4 años).</td>
+                    <td>El sistema genera una alerta automática visible para la jefatura de TI, sin intervención manual.</td>
+                    <td><span class="pill accent"><svg class="icon" aria-hidden="true"><use href="#i-branch"/></svg>Integración</span></td>
+                </tr>
+                <tr>
+                    <td class="id-tag">TC-04</td>
+                    <td>Filtrar el inventario por área "Contabilidad" y estado "Activo".</td>
+                    <td>Los resultados mostrados corresponden exactamente a los criterios filtrados, sin registros ajenos.</td>
+                    <td><span class="pill accent"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg>Funcional</span></td>
+                </tr>
+                <tr>
+                    <td class="id-tag">TC-05</td>
+                    <td>Generar un reporte del inventario completo en formato PDF y en Excel.</td>
+                    <td>Ambos archivos se descargan correctamente y contienen la totalidad de los registros vigentes, sin truncamientos.</td>
+                    <td><span class="pill accent"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg>Funcional</span></td>
+                </tr>
+                <tr>
+                    <td class="id-tag">TC-06</td>
+                    <td>Iniciar sesión con un perfil de "Consulta" e intentar editar un registro existente.</td>
+                    <td>El sistema deniega la acción y muestra un mensaje de permisos insuficientes.</td>
+                    <td><span class="pill warning"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>Seguridad</span></td>
+                </tr>
+                <tr>
+                    <td class="id-tag">TC-07</td>
+                    <td>Simular un inventario de 1500 equipos con 50 usuarios concurrentes ejecutando búsquedas.</td>
+                    <td>El tiempo de respuesta se mantiene por debajo de 3 segundos y el sistema no presenta caídas.</td>
+                    <td><span class="pill critical"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Carga</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="prose">
+        <h3>Criterios de aceptación del software</h3>
+        <ul class="plain">
+            <li>El 100 % de los casos de prueba funcionales críticos (TC-01 a TC-05) debe pasar sin defectos bloqueantes.</li>
+            <li>No se acepta ningún defecto crítico o alto sin resolver al momento de la entrega; se admite un máximo de defectos menores documentados en el backlog.</li>
+            <li>El tiempo de respuesta bajo la carga máxima simulada (TC-07) no debe superar los 3 segundos definidos en RNF-05.</li>
+            <li>El control de acceso por rol (TC-06) debe bloquear el 100 % de los intentos de acción no autorizada durante las pruebas de seguridad.</li>
+            <li>La disponibilidad demostrada durante el piloto (mínimo dos semanas en el entorno de pruebas) debe ser igual o superior al 99 % definido en RNF-02.</li>
+        </ul>
+    </div>
+        </section>
+
+        <section class="step" id="paso4">
+    <div class="step-head">
+        <span class="step-badge"><svg class="icon" aria-hidden="true"><use href="#i-branch"/></svg></span>
+        <div><span class="step-kicker">Paso 04</span><h2>Gestión de la configuración</h2></div>
+    </div>
+
+    <div class="prose">
+        <h3>Versionamiento</h3>
+        <p>Se adopta versionamiento semántico sobre un repositorio Git (GitHub/GitLab), con una estrategia de ramas: <code>main</code> refleja siempre lo desplegado en producción, <code>develop</code> integra los avances en curso, y las ramas <code>feature/*</code>, <code>release/*</code> y <code>hotfix/*</code> aíslan el desarrollo de nuevas funciones, la preparación de versiones y las correcciones urgentes respectivamente. Cada versión liberada se marca con una etiqueta (tag) y queda documentada en el changelog.</p>
+    </div>
+
+    <div class="env-grid">
+        <div class="env-card">
+            <div class="env-head"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>Desarrollo</div>
+            <div class="env-body">Entorno local o compartido del equipo, con datos ficticios. Aquí se integran las ramas <code>feature/*</code> antes de fusionarse con <code>develop</code>.</div>
+        </div>
+        <div class="env-card">
+            <div class="env-head"><svg class="icon" aria-hidden="true"><use href="#i-clipboard"/></svg>Pruebas / QA (staging)</div>
+            <div class="env-body">Réplica de producción con datos anonimizados. Se ejecutan aquí las pruebas de integración, aceptación (UAT) y de carga antes de aprobar un release.</div>
+        </div>
+        <div class="env-card">
+            <div class="env-head"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Producción</div>
+            <div class="env-body">Entorno con datos reales de TechSolutions, acceso restringido y monitoreo activo. Solo recibe versiones aprobadas desde <code>main</code>.</div>
+        </div>
+    </div>
+
+    <div class="prose">
+        <h3>Control de cambios</h3>
+        <ul class="plain">
+            <li>Toda solicitud de cambio se registra como ticket en el gestor de incidencias (Jira o Azure Boards), con severidad y responsable asignados.</li>
+            <li>Los cambios se integran mediante <em>pull requests</em>, con al menos un revisor distinto al autor antes de fusionar a <code>develop</code>.</li>
+            <li>Un pipeline de integración continua (CI/CD) ejecuta automáticamente las pruebas unitarias y de cobertura en cada pull request; solo se permite el paso a <code>main</code> si el pipeline es exitoso.</li>
+            <li>Un pequeño Comité de Control de Cambios (jefatura de TI + líder técnico) aprueba formalmente el paso de una <code>release</code> a producción.</li>
+        </ul>
+    </div>
+        </section>
+
+        <section class="step" id="paso5">
+    <div class="step-head">
+        <span class="step-badge"><svg class="icon" aria-hidden="true"><use href="#i-cloud"/></svg></span>
+        <div><span class="step-kicker">Paso 05</span><h2>Plan de despliegue e instalación</h2></div>
+    </div>
+    <p>Requisitos técnicos mínimos y secuencia de despliegue hacia el entorno del usuario final.</p>
+
+    <div class="table-wrap">
+        <table>
+            <caption>Requisitos técnicos mínimos</caption>
+            <thead><tr><th>Componente</th><th>Requisito</th></tr></thead>
+            <tbody>
+                <tr><td>Servidor</td><td>Windows Server 2019+ o Ubuntu Server 22.04 LTS · 4 vCPU · 8 GB RAM · 100 GB de almacenamiento</td></tr>
+                <tr><td>Base de datos</td><td>SQL Server o PostgreSQL, con respaldo automático diario</td></tr>
+                <tr><td>Servidor web / aplicación</td><td>IIS o Nginx como proxy, con certificado TLS vigente</td></tr>
+                <tr><td>Directorio</td><td>Conexión al Directorio Activo corporativo para autenticación (RNF-06)</td></tr>
+                <tr><td>Cliente</td><td>Navegador Chrome, Edge o Firefox en su última versión estable · resolución mínima 1366×768</td></tr>
+            </tbody>
+            </table>
+    </div>
+
+    <ol class="steps-flow">
+        <li><strong>Preparación del entorno</strong><span class="d">Aprovisionar el servidor y validar dependencias (runtime, motor de base de datos, certificados).</span></li>
+        <li><strong>Respaldo previo</strong><span class="d">Backup completo del entorno y base de datos vigentes, si se trata de una actualización.</span></li>
+        <li><strong>Migración de base de datos</strong><span class="d">Ejecución de scripts de migración versionados junto con el release.</span></li>
+        <li><strong>Despliegue a staging</strong><span class="d">El pipeline CI/CD publica el paquete en el entorno de pruebas.</span></li>
+        <li><strong>Pruebas de humo</strong><span class="d">Verificación rápida de los flujos críticos (login, registro, búsqueda, reportes) en staging.</span></li>
+        <li><strong>Aprobación de cambio</strong><span class="d">El Comité de Control de Cambios autoriza formalmente el paso a producción.</span></li>
+        <li><strong>Despliegue a producción</strong><span class="d">Publicación en una ventana de mantenimiento de bajo uso (fuera de horario laboral).</span></li>
+        <li><strong>Verificación post-despliegue</strong><span class="d">Monitoreo de logs, disponibilidad y tiempos de respuesta durante las primeras 24–48 horas.</span></li>
+    </ol>
+
+    <div class="callout">
+        <svg class="icon" aria-hidden="true"><use href="#i-cloud"/></svg>
+        <span><strong>Plan de reversión (rollback):</strong> si se detecta un error crítico tras el despliegue, se restaura automáticamente el paquete y la base de datos de la versión anterior a partir del respaldo tomado en el paso 2, y se notifica al Comité de Control de Cambios.</span>
+    </div>
+        </section>
+
+        <section class="step" id="paso6">
+    <div class="step-head">
+        <span class="step-badge"><svg class="icon" aria-hidden="true"><use href="#i-headset"/></svg></span>
+        <div><span class="step-kicker">Paso 06</span><h2>Soporte y seguimiento post-proyecto</h2></div>
+    </div>
+    
+    <p class="lede">Estrategia de atención de incidencias y ciclo de mejora continua tras la entrega de SIGEC.</p>
+
+    <div class="prose">
+        <p>Se establece una <strong>mesa de ayuda de TI</strong> como único canal de reporte, con un formulario de incidencias dentro del propio sistema (o herramienta de gestión de tickets como Jira Service Management), y tres niveles de atención escalonados.</p>
+    </div>
+    
+    <div class="table-wrap">
+        <table>
+            <caption>Niveles de atención y tiempos de respuesta (SLA)</caption>
+            <thead><tr><th>Nivel</th><th>Responsable</th><th>Alcance</th><th>Tiempo de respuesta</th></tr></thead>
+            <tbody>
+                <tr><td>N1</td><td>Mesa de ayuda</td><td>Dudas de uso, restablecimiento de acceso</td><td><span class="pill success"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>&lt; 4 h (crítico)</span></td></tr>
+                <tr><td>N2</td><td>Soporte técnico especializado</td><td>Fallas funcionales, errores de datos</td><td><span class="pill warning"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>&lt; 24 h (media)</span></td></tr>
+                <tr><td>N3</td><td>Equipo de desarrollo</td><td>Defectos de código, cambios estructurales</td><td><span class="pill accent"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>&lt; 72 h (baja)</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="prose">
+        <h3>Ciclo de mantenimiento</h3>
+        <ul class="plain">
+            <li><strong>Correctivo:</strong> corrección priorizada por severidad de los defectos detectados en producción, gestionados como tickets en el backlog técnico.</li>
+            <li><strong>Evolutivo:</strong> ciclos trimestrales de mejora a partir de encuestas de satisfacción y solicitudes de la jefatura de TI, priorizados en conjunto con el área de compras cuando implican nuevo hardware.</li>
+            <li><strong>Seguimiento de indicadores:</strong> reuniones mensuales durante los primeros seis meses para revisar las métricas de calidad definidas en el Paso 2 (disponibilidad, tiempo de respuesta, densidad de defectos) y ajustar el plan de mantenimiento.</li>
+        </ul>
+    </div>
+        </section>
+
+        <section class="step" id="paso7">
+    <div class="step-head">
+        <span class="step-badge"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+        <div><span class="step-kicker">Paso 07</span><h2>Documentación del proyecto</h2></div>
+    </div>
+    
+    <p>Formatos y herramientas para documentar SIGEC durante y después del desarrollo.</p>
+
+    <div class="table-wrap">
+        <table>
+            <caption>Formatos y herramientas de documentación</caption>
+            <thead><tr><th>Documento / herramienta</th><th>Propósito</th></tr></thead>
+            <tbody>
+                <tr><td>Manual de usuario (PDF)</td><td>Guía de uso de SIGEC para técnicos de soporte y usuarios finales, sin lenguaje técnico.</td></tr>
+                <tr><td>Manual técnico de arquitectura</td><td>Describe componentes, modelo de datos e integraciones (incluyendo el DA corporativo), para soportar RNF-07 (mantenibilidad).</td></tr>
+                <tr><td>Repositorio Git (GitHub/GitLab)</td><td>Control de versiones del código, historial de commits y trazabilidad de pull requests.</td></tr>
+                <tr><td>Wiki del proyecto (Confluence/Notion)</td><td>Centraliza requerimientos, decisiones de diseño y actas de reunión del equipo.</td></tr>
+                <tr><td>Bitácora de cambios (Changelog)</td><td>Registro cronológico de versiones liberadas y su contenido, ligado al versionamiento semántico.</td></tr>
+                <tr><td>Documentación de API (Swagger/OpenAPI)</td><td>Especifica los endpoints usados en la integración con el Directorio Activo y otros sistemas.</td></tr>
+                <tr><td>Reportes de pruebas (Jira)</td><td>Trazabilidad de los casos de prueba ejecutados y su resultado, referenciados en el Paso 3.</td></tr>
+            </tbody>
+        </table>
+    </div>
+        </section>
+
+    </main>
+</div>
+
+<footer>
+    <p>Actividad final · Ingeniería de Requisitos · TechSolutions (SIGEC — Sistema de Gestión de Inventario de Equipos de Cómputo).</p>
+    <ol class="refs">
+        <li>International Organization for Standardization. (2011). <em>ISO/IEC 25010:2011 — Systems and software engineering — SQuaRE — System and software quality models</em>. ISO.</li>
+        <li>Sommerville, I. (2011). <em>Ingeniería del Software</em> (9.ª ed.). Addison-Wesley. Cap. 22 y 25.</li>
+        <li>Pressman, R. S. (2008). <em>Ingeniería del Software: un enfoque práctico</em>. Cap. 27.</li>
+        <li>Wiegers, K., &amp; Beatty, J. (2013). <em>Software requirements</em> (3.ª ed.). Microsoft Press.</li>
+    </ol>
+</footer>
+</body>
+</html>
